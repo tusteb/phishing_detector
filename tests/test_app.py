@@ -1,5 +1,5 @@
 import pytest
-from app import predict
+from streamlit.app import predict
 
 # Ввод пустого запроса
 def test_predict_empty_text():
@@ -42,4 +42,5 @@ def test_predict_phishing_email():
     phishing_text = "Your account has been suspended. Click here to verify your login immediately."
     message, color = predict(phishing_text)
     assert "Фишинговое" in message
+
     assert color == "red"
