@@ -1,5 +1,6 @@
 import pytest
-from streamlit.app import predict
+from ui.app import predict
+
 
 # Ввод пустого запроса
 def test_predict_empty_text():
@@ -44,3 +45,4 @@ def test_predict_phishing_email():
     assert "Фишинговое" in message
 
     assert color == "red"
+
