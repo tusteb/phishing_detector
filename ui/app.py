@@ -1,7 +1,7 @@
 import streamlit as st
 import re
 import time
-from preprocess import clean_text
+from .preprocess import clean_text
 import requests
 
 API_URL = "http://api:8000/predict"
@@ -47,4 +47,5 @@ with col2:
                         <div style='text-align: center; color:{color}; font-weight:bold; font-size:18px;'>
                             {message}
                         </div>
+
                     """, unsafe_allow_html=True)
