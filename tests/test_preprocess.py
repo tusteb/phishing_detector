@@ -1,6 +1,6 @@
 import re
 import pytest
-from preprocess import (to_lowercase,
+from ui.preprocess import (to_lowercase,
                         expand_contractions,
                         remove_html,
                         remove_urls,
@@ -91,4 +91,5 @@ def test_integration_clean_text():
     assert "world" in cleaned
     assert "2025" not in cleaned
     assert "@" not in cleaned
+
     assert "http" not in cleaned
