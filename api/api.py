@@ -6,8 +6,8 @@ import re
 
 app = FastAPI()
 
-tokenizer = AutoTokenizer.from_pretrained("/app/model")
-model = TFDistilBertForSequenceClassification.from_pretrained("/app/model")
+tokenizer = AutoTokenizer.from_pretrained("model")
+model = TFDistilBertForSequenceClassification.from_pretrained("model")
 nlp = pipeline("text-classification", model=model, tokenizer=tokenizer, framework="tf")
 
 class EmailRequest(BaseModel):
@@ -36,7 +36,3 @@ def predict_email(data: EmailRequest):
         return {"result": "🟢 Безопасное письмо",
                 "response_score": round(score, 2),
                 "label": "safe"}
-
-
-
-
