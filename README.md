@@ -25,7 +25,7 @@
 * GitHub Actions
 
 ## Обучение модели
-Процесс обучения этой модели (а также LSTM и Logistic regression) представлен в папке **/model_training**
+Процесс обучения DistilBERT (а также LSTM и Logistic regression) представлен в папке **/model_training**
 
 ## Запуск проекта c Docker
 ```
@@ -51,3 +51,4 @@ streamlit run ui/app.py
 После скачивания разместите файлы в следующих папках проекта:
 * model_training/phishing_email_full.csv 
 * model/tf_model.h5
+
