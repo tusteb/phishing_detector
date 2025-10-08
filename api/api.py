@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Request
 from pydantic import BaseModel
-from .preprocess import clean_text
+from preprocess import clean_text
 from transformers import AutoTokenizer, TFDistilBertForSequenceClassification, pipeline
 import re
 
@@ -36,5 +36,6 @@ def predict_email(data: EmailRequest):
         return {"result": "🟢 Безопасное письмо",
                 "response_score": round(score, 2),
                 "label": "safe"}
+
 
 
