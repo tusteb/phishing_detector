@@ -43,13 +43,11 @@ uvicorn api.api:app --reload
 
 streamlit run ui/app.py
 ```
+
 ## Недостающие данные
 
 Из-за ограничений GitHub файлы больше 100 MB не хранятся в репозитории, поэтому веса модели и данные для обучения модели можно скачать по ссылке:<br> (https://drive.google.com/drive/folders/1S2ZFXDzgETbiSd4hkN5piQDqhBQejcof?usp=sharing)
 
 После скачивания разместите файлы в следующих папках проекта:
 * model_training/phishing_email_full.csv 
-* api/model/tf_model.h5
-
-
-
+* model/tf_model.h5
