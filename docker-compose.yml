@@ -1,17 +1,14 @@
 services:
   api:
-    build: ./api
+    build:
+      context: .
+      dockerfile: api/Dockerfile.api
     ports:
       - "8000:8000"
-    volumes:
-      - ./api:/app
 
-  streamlit:
-    build: ./ui
+  ui:
+    build:
+      context: .
+      dockerfile: ui/Dockerfile.ui
     ports:
       - "8501:8501"
-    volumes:
-      - ./ui:/app
-    depends_on:
-      - api
-
