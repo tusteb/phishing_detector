@@ -37,12 +37,11 @@ Streamlit: http://localhost:8501
 
 ## Запуск без Docker
 ```
-pip install -r api/requirements.txt
-pip install -r streamlit/requirements.txt
+pip install -r requirements.txt
 
 uvicorn api.api:app --reload
 
-streamlit run streamlit/app.py
+streamlit run ui/app.py
 ```
 ## Недостающие данные
 
@@ -51,5 +50,6 @@ streamlit run streamlit/app.py
 После скачивания разместите файлы в следующих папках проекта:
 * model_training/phishing_email_full.csv 
 * api/model/tf_model.h5
+
 
 
