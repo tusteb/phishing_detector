@@ -1,6 +1,6 @@
 import streamlit as st
 import time
-from ui.predictor import predict
+from predictor import predict
 
 st.set_page_config(page_title="Phishing Detector")
 st.markdown("# 📧 Phishing-detector")
@@ -20,4 +20,3 @@ with col2:
                         {message}
                     </div>
                     """, unsafe_allow_html=True)
-
