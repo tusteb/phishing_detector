@@ -1,6 +1,6 @@
 import re
 import requests
-from .preprocess import clean_text
+from preprocess import clean_text
 
 API_URL = "http://api:8000/predict"
 
