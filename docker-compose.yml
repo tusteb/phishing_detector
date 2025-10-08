@@ -7,10 +7,11 @@ services:
       - ./api:/app
 
   streamlit:
-    build: ./streamlit
+    build: ./ui
     ports:
       - "8501:8501"
     volumes:
-      - ./streamlit:/app
+      - ./ui:/app
     depends_on:
       - api
+
