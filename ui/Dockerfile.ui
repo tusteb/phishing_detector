@@ -2,5 +2,9 @@ FROM python:3.10
 WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-COPY . .
+COPY api ./api
+COPY ui ./ui
+COPY preprocess.py .
+COPY model ./model
+ENV PYTHONPATH=/app
 CMD ["streamlit", "run", "ui/app.py", "--server.port=8501", "--server.address=0.0.0.0"]
