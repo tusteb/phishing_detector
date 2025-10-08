@@ -1,6 +1,6 @@
 import re
 import pytest
-from ui.preprocess import (to_lowercase,
+from preprocess import (to_lowercase,
                         expand_contractions,
                         remove_html,
                         remove_urls,
@@ -74,9 +74,6 @@ def test_clean_text_pipeline():
     assert "hello" in cleaned
     assert "2025" not in cleaned
 
-def normalize_spaces(text: str) -> str:
-    return re.sub(r"\s+", " ", text).strip().lower()
-
 def test_integration_clean_text():
     raw_text = """<html>
                         <body>
@@ -91,5 +88,4 @@ def test_integration_clean_text():
     assert "world" in cleaned
     assert "2025" not in cleaned
     assert "@" not in cleaned
-
     assert "http" not in cleaned
