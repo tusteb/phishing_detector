@@ -6,17 +6,31 @@ import re
 
 app = FastAPI()
 
+# Загрузка модели и токенизатора
 tokenizer = AutoTokenizer.from_pretrained("model")
 model = TFDistilBertForSequenceClassification.from_pretrained("model")
 nlp = pipeline("text-classification", model=model, tokenizer=tokenizer, framework="tf")
 
 class EmailRequest(BaseModel):
+    '''
+    Класс для описания входных данных
+    '''
     text: str
 
+# Эндпоинт /predict
 @app.post("/predict")
 def predict_email(data: EmailRequest):
-    text = data.text
+    '''
+    Функция для получения предсказания модели на основе вводимого текста:
 
+    1. Принимаем текст письма
+    2. Проверяем, что текст не пустой и содержит латинские буквы
+    3. Предобрабатываем текст через функцию clean_text
+    4. Если после очистки текст пустой - возвращаем ошибку 'invalid'
+    
+    Возвращаем результат, метку класса и вероятность
+    '''
+    text = data.text
     if not text.strip() or not re.search(r"[a-zA-Z]", text):
         return {"result": "⚠️ Введите тект на английском языке", "label": "invalid"}
 
