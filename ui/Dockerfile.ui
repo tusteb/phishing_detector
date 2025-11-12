@@ -1,10 +1,8 @@
-FROM python:3.10
+FROM python:3.10-slim
 WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-COPY api ./api
-COPY ui ./ui
-COPY preprocess.py .
-COPY model ./model
+COPY ui/ /app/ui
+ENV API_URL=http://api:8000/predict
 ENV PYTHONPATH=/app
 CMD ["streamlit", "run", "ui/app.py", "--server.port=8501", "--server.address=0.0.0.0"]
