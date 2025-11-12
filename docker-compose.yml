@@ -1,14 +1,37 @@
 services:
+  llama:
+    build:
+      context: .
+      dockerfile: llama/Dockerfile.llama
+    container_name: llama-server
+    volumes:
+      - ./models:/app/models
+    ports:
+      - "8080:8080"
+
   api:
     build:
       context: .
       dockerfile: api/Dockerfile.api
+    container_name: phishing-api
+    volumes:
+      - ./models:/app/models
     ports:
       - "8000:8000"
+    depends_on:
+      - llama
+    environment:
+      - DISTILBERT_PATH=/app/models
+      - LLAMA_SERVER=http://llama:8080
 
   ui:
     build:
       context: .
       dockerfile: ui/Dockerfile.ui
+    container_name: phishing-ui
     ports:
       - "8501:8501"
+    depends_on:
+      - api
+    environment:
+      - API_URL=http://api:8000/predict
