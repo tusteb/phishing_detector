@@ -1,0 +1,9 @@
+FROM ubuntu:22.04
+WORKDIR /app
+RUN apt-get update && apt-get install -y \
+    libcurl4-openssl-dev \
+    libgomp1 \
+    && rm -rf /var/lib/apt/lists/*
+COPY ./llama/llama-server /app/llama-server
+COPY ./llama/*.so /usr/lib/
+CMD ["./llama-server", "-m", "/app/models/mistral-7b-instruct-v0.1.Q5_K_M.gguf", "--host", "0.0.0.0", "--port", "8080"]
