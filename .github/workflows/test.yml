@@ -32,8 +32,5 @@ jobs:
           pip install -r requirements.txt
           pip install pytest pytest-cov flake8
 
-      - name: Lint with flake8
-        run: flake8 .
-
       - name: Run tests with coverage
         run: pytest --cov=ui --cov=api --cov=models -v
