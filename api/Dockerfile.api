@@ -1,10 +1,8 @@
-FROM python:3.10
+FROM python:3.10-slim
 WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-COPY api ./api
-COPY ui ./ui
-COPY preprocess.py .
-COPY model ./model
-ENV PYTHONPATH=/app
+COPY api/ /app/api
+ENV DISTILBERT_PATH=/app/models
+ENV LLAMA_SERVER=http://llama:8080
 CMD ["uvicorn", "api.api:app", "--host", "0.0.0.0", "--port", "8000"]
