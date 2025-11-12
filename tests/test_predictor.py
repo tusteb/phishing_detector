@@ -16,19 +16,19 @@ class FakeResponse:
             raise requests.exceptions.HTTPError(f"HTTP {self.status_code}")
 
 def test_empty_text():
-  '''
-  Проверяем пустой ввод
-  Ожидаем текст "Введите текст" и цвет "orange"
-  '''
+    '''
+    Проверяем пустой ввод
+    Ожидаем текст "Введите текст" и цвет "orange"
+    '''
     result, color = predictor.predict("", model="distilbert")
     assert "Введите текст" in result
     assert color == "orange"
 
 def test_invalid_model(monkeypatch):
-  '''
-  Проверяем неизвестную модель
-  Ожидаем текст "Неизвестная модель" и цвет "orange"
-  '''
+    '''
+    Проверяем неизвестную модель
+    Ожидаем текст "Неизвестная модель" и цвет "orange"
+    '''
     def fake_post(url, json, **kwargs):
         return FakeResponse({"label": "invalid", "reason": "⚠️ Неизвестная модель"})
     monkeypatch.setattr(predictor.requests, "post", fake_post)
@@ -38,10 +38,10 @@ def test_invalid_model(monkeypatch):
     assert color == "orange"
 
 def test_distilbert_phishing(monkeypatch):
-  '''
-  Проверяем ответ модели distilbert на фишинговое письмо
-  Ожидаем текст "Фишинговое письмо" и цвет "red"
-  '''
+    '''
+    Проверяем ответ модели distilbert на фишинговое письмо
+    Ожидаем текст "Фишинговое письмо" и цвет "red"
+    '''
     def fake_post(url, json, **kwargs):
         return FakeResponse({"label": "phishing", "response_score": 0.95})
     monkeypatch.setattr(predictor.requests, "post", fake_post)
@@ -51,10 +51,10 @@ def test_distilbert_phishing(monkeypatch):
     assert color == "red"
 
 def test_distilbert_safe(monkeypatch):
-  '''
-  Проверяем ответ модели distilbert на безопасное письмо
-  Ожидаем текст "Безопасное письмо" и цвет "green"
-  '''
+    '''
+    Проверяем ответ модели distilbert на безопасное письмо
+    Ожидаем текст "Безопасное письмо" и цвет "green"
+    '''
     def fake_post(url, json, **kwargs):
         return FakeResponse({"label": "safe", "response_score": 0.88})
     monkeypatch.setattr(predictor.requests, "post", fake_post)
@@ -64,10 +64,10 @@ def test_distilbert_safe(monkeypatch):
     assert color == "green"
 
 def test_mistral_phishing(monkeypatch):
-  '''
-  Проверяем ответ модели mistral на фишинговое письмо
-  Ожидаем текст "Фишинговое письмо" и цвет "red"
-  '''
+    '''
+    Проверяем ответ модели mistral на фишинговое письмо
+    Ожидаем текст "Фишинговое письмо" и цвет "red"
+    '''
     def fake_post(url, json, **kwargs):
         return FakeResponse({"label": "Фишинг", "reason": "Подозрительная ссылка"})
     monkeypatch.setattr(predictor.requests, "post", fake_post)
@@ -77,10 +77,10 @@ def test_mistral_phishing(monkeypatch):
     assert color == "red"
 
 def test_mistral_normal(monkeypatch):
-  '''
-  Проверяем ответ модели mistral на безопасное письмо
-  Ожидаем текст "Безопасное письмо" и цвет "green"
-  '''
+    '''
+    Проверяем ответ модели mistral на безопасное письмо
+    Ожидаем текст "Безопасное письмо" и цвет "green"
+    '''
     def fake_post(url, json, **kwargs):
         return FakeResponse({"label": "Нормальное", "reason": "Обычное письмо"})
     monkeypatch.setattr(predictor.requests, "post", fake_post)
@@ -90,10 +90,10 @@ def test_mistral_normal(monkeypatch):
     assert color == "green"
 
 def test_api_connection_error(monkeypatch):
-  '''
-  Проверяем ошибку соединения
-  Ожидаем текст "Ошибка при подключении" и цвет "orange"
-  '''
+    '''
+    Проверяем ошибку соединения
+    Ожидаем текст "Ошибка при подключении" и цвет "orange"
+    '''
     def fake_post(url, json, **kwargs):
         raise requests.exceptions.ConnectionError("Connection failed")
     monkeypatch.setattr(predictor.requests, "post", fake_post)
